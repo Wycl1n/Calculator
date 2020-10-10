@@ -12,12 +12,21 @@ namespace Продвинутый_Калькулятор
 {
     public partial class Form1 : Form
     {
-        
+
         private string[] ParserInput(string input)
         {
+            int n = 0;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (input[i] == '(') n++;
+                if (input[i] == ')') n--;
+            }
+            for (int i = 0; i < n; i++)
+                if (n > 0) input += ')';
+
             string[] result = new string[input.Length];
             for (int i = 0; i < input.Length; i++) result[i] = "";
-            for (int i = 0, i_result = 0; i < input.Length; i++)  
+            for (int i = 0, i_result = 0; i < input.Length; i++)
             {
                 switch (input[i])
                 {
@@ -38,17 +47,17 @@ namespace Продвинутый_Калькулятор
                         }
                     case 'p':
                         {
-                            result[i_result] = "3,14159265359";
+                            result[i_result] = Convert.ToString(Math.PI);
                             break;
                         }
                     case 'e':
                         {
-                            result[i_result] = "2,71828182846";
+                            result[i_result] = Convert.ToString(Math.E);
                             break;
                         }
                     default:
                         {
-                            if (i == 0) 
+                            if (i == 0)
                             {
                                 result[i_result++] = Convert.ToString(input[i]);
                                 break;
@@ -86,9 +95,9 @@ namespace Продвинутый_Калькулятор
         }
         private string Calculate(string[] pInput)
         {
-            for(int i=0;i<pInput.Length;i++)
+            for (int i = 0; i < pInput.Length; i++)
             {
-                if(pInput[i]=="(")
+                if (pInput[i] == "(")
                 {
                     int j_of_end = 0;
                     for (int j = i + 1, n = 1; j < pInput.Length; j++)
@@ -117,33 +126,94 @@ namespace Продвинутый_Калькулятор
                 switch (Char)
                 {
                     case "l":
-                        pInput[i] = Convert.ToString(Math.Log(Convert.ToDouble(pInput[i + 1])) / Math.Log(2));
-                        for (int j = i + 1; j < pInput.Length - 1; j++) 
+                        if (pInput[i + 1] == "o")
                         {
-                            pInput[j] = pInput[j + 1];
+                            pInput[i] = Convert.ToString(Math.Log(Convert.ToDouble(pInput[i + 3])) / Math.Log(2));
+                            for (int z = 0; z < 3; z++)
+                            {
+                                for (int j = i + 1; j < pInput.Length - 1; j++)
+                                {
+                                    pInput[j] = pInput[j + 1];
+                                }
+                                Array.Resize(ref pInput, pInput.Length - 1);
+                            }
                         }
-                        for (int j = i + 1; j < pInput.Length - 1; j++) 
+                        if (pInput[i + 1] == "g")
                         {
-                            pInput[j] = pInput[j + 1];
+                            pInput[i] = Convert.ToString(Math.Log(Convert.ToDouble(pInput[i + 2])) / Math.Log(10));
+                            for (int z = 0; z < 2; z++)
+                            {
+                                for (int j = i + 1; j < pInput.Length - 1; j++)
+                                {
+                                    pInput[j] = pInput[j + 1];
+                                }
+                                Array.Resize(ref pInput, pInput.Length - 1);
+                            }
                         }
-                        for (int j = i + 1; j < pInput.Length - 1; j++) 
+                        if (pInput[i + 1] == "n")
                         {
-                            pInput[j] = pInput[j + 1];
+                            pInput[i] = Convert.ToString(Math.Log(Convert.ToDouble(pInput[i + 2])) / Math.Log(Math.E));
+                            for (int z = 0; z < 2; z++)
+                            {
+                                for (int j = i + 1; j < pInput.Length - 1; j++)
+                                {
+                                    pInput[j] = pInput[j + 1];
+                                }
+                                Array.Resize(ref pInput, pInput.Length - 1);
+                            }
                         }
-                        Array.Resize(ref pInput, pInput.Length - 1);
                         break;
+                    case "s":
+                        pInput[i] = Convert.ToString(Math.Sin(Convert.ToDouble(pInput[i + 3])));
+                        for (int z = 0; z < 3; z++)
+                        {
+                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            {
+                                pInput[j] = pInput[j + 1];
+                            }
+                            Array.Resize(ref pInput, pInput.Length - 1);
+                        }
+                        break;
+                    case "c":
+                        pInput[i] = Convert.ToString(Math.Cos(Convert.ToDouble(pInput[i + 3])));
+                        for (int z = 0; z < 3; z++)
+                        {
+                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            {
+                                pInput[j] = pInput[j + 1];
+                            }
+                            Array.Resize(ref pInput, pInput.Length - 1);
+                        }
+                        break;
+                    case "t":
+                        pInput[i] = Convert.ToString(Math.Tan(Convert.ToDouble(pInput[i + 3])));
+                        for (int z = 0; z < 3; z++)
+                        {
+                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            {
+                                pInput[j] = pInput[j + 1];
+                            }
+                            Array.Resize(ref pInput, pInput.Length - 1);
+                        }
+                        break;
+                }
+            }
+            for (int i = 0; i < pInput.Length; i++)
+            {
+                string Char = pInput[i];
+                switch (Char)
+                {
                     case "^":
                         pInput[i - 1] = Convert.ToString(Math.Pow(Convert.ToDouble(pInput[i - 1]), Convert.ToDouble(pInput[i + 1])));
-                        for (int j = i; j < pInput.Length - 1; j++)
+                        for (int z = 0; z < 2; z++)
                         {
-                            pInput[j] = pInput[j + 1];
-                        }
-                        for (int j = i; j < pInput.Length - 1; j++)
-                        {
-                            pInput[j] = pInput[j + 1];
+                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            {
+                                pInput[j] = pInput[j + 1];
+                            }
+                            Array.Resize(ref pInput, pInput.Length - 1);
                         }
                         i--;
-                        Array.Resize(ref pInput, pInput.Length - 2);
                         break;
                     case "!":
                         double value = 1;
@@ -160,29 +230,27 @@ namespace Продвинутый_Калькулятор
                         break;
                     case "*":
                         pInput[i - 1] = Convert.ToString(Convert.ToDouble(pInput[i - 1]) * Convert.ToDouble(pInput[i + 1]));
-                        for (int j = i; j < pInput.Length - 1; j++)
+                        for (int z = 0; z < 2; z++)
                         {
-                            pInput[j] = pInput[j + 1];
-                        }
-                        for (int j = i; j < pInput.Length - 1; j++)
-                        {
-                            pInput[j] = pInput[j + 1];
+                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            {
+                                pInput[j] = pInput[j + 1];
+                            }
+                            Array.Resize(ref pInput, pInput.Length - 1);
                         }
                         i--;
-                        Array.Resize(ref pInput, pInput.Length - 1);
                         break;
                     case "/":
                         pInput[i - 1] = Convert.ToString(Convert.ToDouble(pInput[i - 1]) / Convert.ToDouble(pInput[i + 1]));
-                        for (int j = i; j < pInput.Length - 1; j++)
+                        for (int z = 0; z < 2; z++)
                         {
-                            pInput[j] = pInput[j + 1];
-                        }
-                        for (int j = i; j < pInput.Length - 1; j++)
-                        {
-                            pInput[j] = pInput[j + 1];
+                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            {
+                                pInput[j] = pInput[j + 1];
+                            }
+                            Array.Resize(ref pInput, pInput.Length - 1);
                         }
                         i--;
-                        Array.Resize(ref pInput, pInput.Length - 1);
                         break;
 
                 }
@@ -194,29 +262,27 @@ namespace Продвинутый_Калькулятор
                 {
                     case "+":
                         pInput[i - 1] = Convert.ToString(Convert.ToDouble(pInput[i - 1]) + Convert.ToDouble(pInput[i + 1]));
-                        for (int j = i; j < pInput.Length - 1; j++)
+                        for (int z = 0; z < 2; z++)
                         {
-                            pInput[j] = pInput[j + 1];
-                        }
-                        for (int j = i; j < pInput.Length - 1; j++)
-                        {
-                            pInput[j] = pInput[j + 1];
+                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            {
+                                pInput[j] = pInput[j + 1];
+                            }
+                            Array.Resize(ref pInput, pInput.Length - 1);
                         }
                         i--;
-                        Array.Resize(ref pInput, pInput.Length - 1);
                         break;
                     case "-":
                         pInput[i - 1] = Convert.ToString(Convert.ToDouble(pInput[i - 1]) - Convert.ToDouble(pInput[i + 1]));
-                        for (int j = i; j < pInput.Length - 1; j++)
+                        for (int z = 0; z < 2; z++)
                         {
-                            pInput[j] = pInput[j + 1];
-                        }
-                        for (int j = i; j < pInput.Length - 1; j++)
-                        {
-                            pInput[j] = pInput[j + 1];
+                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            {
+                                pInput[j] = pInput[j + 1];
+                            }
+                            Array.Resize(ref pInput, pInput.Length - 1);
                         }
                         i--;
-                        Array.Resize(ref pInput, pInput.Length - 1);
                         break;
                 }
             }
@@ -321,7 +387,8 @@ namespace Продвинутый_Калькулятор
         }
         private void button20_Click(object sender, EventArgs e)
         {
-            input = input.Remove(input.Length - 1);
+            if (input.Length != 0) 
+                input = input.Remove(input.Length - 1);
             textBox1.Text = input;
         }
         private void button21_Click(object sender, EventArgs e)
@@ -353,7 +420,6 @@ namespace Продвинутый_Калькулятор
         {
 
         }
-
         private void button12_Click(object sender, EventArgs e)
         {
             input = textBox1.Text;
@@ -361,5 +427,30 @@ namespace Продвинутый_Калькулятор
             textBox1.Text = Convert.ToString(result);
             input = Convert.ToString(result);
         }
+        private void button26_Click(object sender, EventArgs e)
+        {
+            input += "lg(";
+            textBox1.Text = input;
+        }
+        private void button27_Click(object sender, EventArgs e)
+        {
+            input += "ln(";
+            textBox1.Text = input;
+                }
+        private void button28_Click(object sender, EventArgs e)
+                {
+                    input += "sin(";
+                    textBox1.Text = input;
+                }
+        private void button29_Click(object sender, EventArgs e)
+                {
+                    input += "cos(";
+                    textBox1.Text = input;
+                }
+        private void button30_Click(object sender, EventArgs e)
+                {
+                    input += "tg(";
+                    textBox1.Text = input;
+                }
     }
 }
