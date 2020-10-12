@@ -207,7 +207,7 @@ namespace Продвинутый_Калькулятор
                         pInput[i - 1] = Convert.ToString(Math.Pow(Convert.ToDouble(pInput[i - 1]), Convert.ToDouble(pInput[i + 1])));
                         for (int z = 0; z < 2; z++)
                         {
-                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            for (int j = i; j < pInput.Length - 1; j++)
                             {
                                 pInput[j] = pInput[j + 1];
                             }
@@ -232,7 +232,7 @@ namespace Продвинутый_Калькулятор
                         pInput[i - 1] = Convert.ToString(Convert.ToDouble(pInput[i - 1]) * Convert.ToDouble(pInput[i + 1]));
                         for (int z = 0; z < 2; z++)
                         {
-                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            for (int j = i; j < pInput.Length - 1; j++)
                             {
                                 pInput[j] = pInput[j + 1];
                             }
@@ -244,7 +244,7 @@ namespace Продвинутый_Калькулятор
                         pInput[i - 1] = Convert.ToString(Convert.ToDouble(pInput[i - 1]) / Convert.ToDouble(pInput[i + 1]));
                         for (int z = 0; z < 2; z++)
                         {
-                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            for (int j = i; j < pInput.Length - 1; j++)
                             {
                                 pInput[j] = pInput[j + 1];
                             }
@@ -264,7 +264,7 @@ namespace Продвинутый_Калькулятор
                         pInput[i - 1] = Convert.ToString(Convert.ToDouble(pInput[i - 1]) + Convert.ToDouble(pInput[i + 1]));
                         for (int z = 0; z < 2; z++)
                         {
-                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            for (int j = i; j < pInput.Length - 1; j++)
                             {
                                 pInput[j] = pInput[j + 1];
                             }
@@ -276,7 +276,7 @@ namespace Продвинутый_Калькулятор
                         pInput[i - 1] = Convert.ToString(Convert.ToDouble(pInput[i - 1]) - Convert.ToDouble(pInput[i + 1]));
                         for (int z = 0; z < 2; z++)
                         {
-                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                            for (int j = i; j < pInput.Length - 1; j++)
                             {
                                 pInput[j] = pInput[j + 1];
                             }
@@ -298,56 +298,67 @@ namespace Продвинутый_Калькулятор
         private void button1_Click(object sender, EventArgs e)
         {
             input += "1";
+            label1.Text = Calculate(ParserInput(input));
             textBox1.Text = input;
         }
         private void button2_Click(object sender, EventArgs e)
         {
             input += "2";
+            label1.Text = Calculate(ParserInput(input));
             textBox1.Text = input;
         }
         private void button3_Click(object sender, EventArgs e)
         {
             input += "3";
+            label1.Text = Calculate(ParserInput(input));
             textBox1.Text = input;
         }
         private void button4_Click(object sender, EventArgs e)
         {
             input += "4";
+            label1.Text = Calculate(ParserInput(input));
             textBox1.Text = input;
         }
         private void button5_Click(object sender, EventArgs e)
         {
             input += "5";
+            label1.Text = Calculate(ParserInput(input));
             textBox1.Text = input;
         }
         private void button6_Click(object sender, EventArgs e)
         {
             input += "6";
+            label1.Text = Calculate(ParserInput(input));
             textBox1.Text = input;
         }
         private void button7_Click(object sender, EventArgs e)
         {
             input += "7";
+            label1.Text = Calculate(ParserInput(input));
             textBox1.Text = input;
         }
         private void button8_Click(object sender, EventArgs e)
         {
             input += "8";
+            label1.Text = Calculate(ParserInput(input));
             textBox1.Text = input;
         }
         private void button9_Click(object sender, EventArgs e)
         {
             input += "9";
+            label1.Text = Calculate(ParserInput(input));
             textBox1.Text = input;
         }
         private void button10_Click(object sender, EventArgs e)
         {
             input += "0";
+            label1.Text = Calculate(ParserInput(input));
             textBox1.Text = input;
         }
         private void button11_Click(object sender, EventArgs e)
         {
             input += ",";
+            label1.Text = Calculate(ParserInput(input));
             textBox1.Text = input;
         }
         private void button13_Click(object sender, EventArgs e)
