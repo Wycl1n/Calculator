@@ -12,7 +12,7 @@ namespace Продвинутый_Калькулятор
 {
     public partial class Form1 : Form
     {
-
+        string input = "";
         private string[] ParserInput(string input)
         {
             int n = 0;
@@ -289,7 +289,6 @@ namespace Продвинутый_Калькулятор
             return pInput[0];
         }
 
-        string input = "";
         public Form1()
         {
             InitializeComponent();
