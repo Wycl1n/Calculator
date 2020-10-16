@@ -126,43 +126,51 @@ namespace Продвинутый_Калькулятор
                 switch (Char)
                 {
                     case "l":
-                        if (pInput[i + 1] == "o")
                         {
-                            pInput[i] = Convert.ToString(Math.Log(Convert.ToDouble(pInput[i + 3])) / Math.Log(2));
-                            for (int z = 0; z < 3; z++)
+                            switch (pInput[i + 1])
                             {
-                                for (int j = i + 1; j < pInput.Length - 1; j++)
-                                {
-                                    pInput[j] = pInput[j + 1];
-                                }
-                                Array.Resize(ref pInput, pInput.Length - 1);
+                                case "o":
+                                    {
+                                        pInput[i] = Convert.ToString(Math.Log(Convert.ToDouble(pInput[i + 3])) / Math.Log(2));
+                                        for (int z = 0; z < 3; z++)
+                                        {
+                                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                                            {
+                                                pInput[j] = pInput[j + 1];
+                                            }
+                                            Array.Resize(ref pInput, pInput.Length - 1);
+                                        }
+                                        break;
+                                    }
+                                case "g":
+                                    {
+                                        pInput[i] = Convert.ToString(Math.Log(Convert.ToDouble(pInput[i + 2])) / Math.Log(10));
+                                        for (int z = 0; z < 2; z++)
+                                        {
+                                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                                            {
+                                                pInput[j] = pInput[j + 1];
+                                            }
+                                            Array.Resize(ref pInput, pInput.Length - 1);
+                                        }
+                                        break;
+                                    }
+                                case "n":
+                                    {
+                                        pInput[i] = Convert.ToString(Math.Log(Convert.ToDouble(pInput[i + 2])) / Math.Log(Math.E));
+                                        for (int z = 0; z < 2; z++)
+                                        {
+                                            for (int j = i + 1; j < pInput.Length - 1; j++)
+                                            {
+                                                pInput[j] = pInput[j + 1];
+                                            }
+                                            Array.Resize(ref pInput, pInput.Length - 1);
+                                        }
+                                        break;
+                                    }
                             }
+                            break;
                         }
-                        if (pInput[i + 1] == "g")
-                        {
-                            pInput[i] = Convert.ToString(Math.Log(Convert.ToDouble(pInput[i + 2])) / Math.Log(10));
-                            for (int z = 0; z < 2; z++)
-                            {
-                                for (int j = i + 1; j < pInput.Length - 1; j++)
-                                {
-                                    pInput[j] = pInput[j + 1];
-                                }
-                                Array.Resize(ref pInput, pInput.Length - 1);
-                            }
-                        }
-                        if (pInput[i + 1] == "n")
-                        {
-                            pInput[i] = Convert.ToString(Math.Log(Convert.ToDouble(pInput[i + 2])) / Math.Log(Math.E));
-                            for (int z = 0; z < 2; z++)
-                            {
-                                for (int j = i + 1; j < pInput.Length - 1; j++)
-                                {
-                                    pInput[j] = pInput[j + 1];
-                                }
-                                Array.Resize(ref pInput, pInput.Length - 1);
-                            }
-                        }
-                        break;
                     case "s":
                         pInput[i] = Convert.ToString(Math.Sin(Convert.ToDouble(pInput[i + 3])));
                         for (int z = 0; z < 3; z++)
