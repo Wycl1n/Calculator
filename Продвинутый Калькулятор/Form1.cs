@@ -15,6 +15,7 @@ namespace Продвинутый_Калькулятор
         string input = "";
         private string[] ParserInput(string input)
         {
+            input = input.Replace("-", "(0-");
             int n = 0;
             for (int i = 0; i < input.Length; i++)
             {
@@ -194,8 +195,8 @@ namespace Продвинутый_Калькулятор
                         }
                         break;
                     case "t":
-                        pInput[i] = Convert.ToString(Math.Tan(Convert.ToDouble(pInput[i + 3])));
-                        for (int z = 0; z < 3; z++)
+                        pInput[i] = Convert.ToString(Math.Tan(Convert.ToDouble(pInput[i + 2])));
+                        for (int z = 0; z < 2; z++)
                         {
                             for (int j = i + 1; j < pInput.Length - 1; j++)
                             {
