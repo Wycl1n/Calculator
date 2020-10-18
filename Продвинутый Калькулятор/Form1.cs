@@ -15,7 +15,48 @@ namespace Продвинутый_Калькулятор
         string input = "";
         private string[] ParserInput(string input)
         {
-            input = input.Replace("-", "(0-");
+            int[] requered_minuses = new int[input.Length];
+            int i_requered_minuses = 0;
+            for (int i=0;i<input.Length;i++)
+            {
+                if (input[i] == '-')
+                {
+                    if (i == 0)
+                    {
+                        input = input.Insert(0, "(0");
+                        requered_minuses[i_requered_minuses++] = i + 3;
+                        i += 4;
+                        continue;
+                    }
+                    if(input[i-1] == '1' || input[i - 1] == '2' || input[i - 1] == '3' || input[i - 1] == '4' || input[i - 1] == '5' || input[i - 1] == '6' || input[i - 1] == '7' || input[i - 1] == '8' || input[i - 1] == '9' || input[i - 1] == '0')
+                    {
+                        input = input.Insert(i, "+(0");
+                        requered_minuses[i_requered_minuses++] = i + 4;
+                        i += 5;
+                        continue;
+                    }
+                    else
+                    {
+                        input = input.Insert(i, "(0");
+                        requered_minuses[i_requered_minuses++] = i + 3;
+                        i += 4;
+                        continue;
+                    }
+                }
+            }
+
+            for(int i=0;i<i_requered_minuses;i++)
+            {
+                for (int j = requered_minuses[i] + 1; j < input.Length; j++)
+                {
+                    if (input[j] != '1' || input[j] != '2' || input[j] != '3' || input[j] != '4' || input[j] != '5' || input[j] != '6' || input[j] != '7' || input[j] != '8' || input[j] != '9' || input[j] != '0')
+                    {
+                        input = input.Insert(j, ")");
+                        break;
+                    }
+                }
+            }
+
             int n = 0;
             for (int i = 0; i < input.Length; i++)
             {
